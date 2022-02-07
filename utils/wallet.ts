@@ -1,27 +1,18 @@
 import { ethers } from "ethers";
 
-export const addAccountChangeEvent = () => {
-    console.log('adding accountsChanged Event')
-    window.ethereum.on('accountsChanged', function (accounts) {
-        // TODO: DO SOMETHING WITH THIS
-        console.log('accounts has changed', accounts)
-    })
-}
-
 export const connectToBSC = async () => {
     const ethereum = window.ethereum;
     const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-    console.log(accounts);
 }
 
-export const sendTransaction = async (address_to = '0x89D618eF51c3e27548E9A1AA6908FA0A2d21acAB') => {
+export const sendTransaction = async (address_to = '0x89D618eF51c3e27548E9A1AA6908FA0A2d21acAB', amount) => {
     const ethereum = window.ethereum;
     const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
 
     const txRequest = [{
         to: address_to,
         from: accounts[0],
-        value: ethers.utils.parseUnits("0.0036", 'ether').toHexString()
+        value: ethers.utils.parseUnits(sanitizeAndGetValue(amount), 'ether').toHexString()
     }]
 
     try {
@@ -33,8 +24,19 @@ export const sendTransaction = async (address_to = '0x89D618eF51c3e27548E9A1AA69
     } catch (error) {
         return error
     }
+}
 
+const sanitizeAndGetValue = (amount) => {
+    const mateValue = 0.0036;
+    const sanitizedAmount = Math.trunc(parseInt(amount))
+    const finalAmount = sanitizedAmount * mateValue;
 
+    return finalAmount.toString()
+}
+
+export const getAproxUSDMateValue = (amount) => {
+    const sanitizedAmount = Math.trunc(parseInt(amount))
+    return sanitizedAmount * 1.3
 }
 
 export const isConnected = async () => {
@@ -42,7 +44,7 @@ export const isConnected = async () => {
     const accounts = await provider.send("eth_accounts", []);
 
     if (accounts.length === 0) {
-        return false
+        return null
     }
-    return true
+    return accounts
 }
