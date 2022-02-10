@@ -5,7 +5,7 @@ export const connectToBSC = async () => {
     const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
 }
 
-export const sendTransaction = async (address_to = '0x89D618eF51c3e27548E9A1AA6908FA0A2d21acAB', amount) => {
+export const sendTransaction = async (address_to = '0x89D618eF51c3e27548E9A1AA6908FA0A2d21acAB', amount: string) => {
     const ethereum = window.ethereum;
     const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
 
@@ -26,7 +26,7 @@ export const sendTransaction = async (address_to = '0x89D618eF51c3e27548E9A1AA69
     }
 }
 
-const sanitizeAndGetValue = (amount) => {
+const sanitizeAndGetValue = (amount: string) => {
     const mateValue = 0.0036;
     const sanitizedAmount = Math.trunc(parseInt(amount))
     const finalAmount = sanitizedAmount * mateValue;
@@ -34,7 +34,7 @@ const sanitizeAndGetValue = (amount) => {
     return finalAmount.toString()
 }
 
-export const getAproxUSDMateValue = (amount) => {
+export const getAproxUSDMateValue = (amount: string) => {
     const sanitizedAmount = Math.trunc(parseInt(amount))
     return sanitizedAmount * 1.3
 }
