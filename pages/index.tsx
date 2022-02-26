@@ -51,7 +51,7 @@ const Home: NextPage = () => {
   return (
     <div className='h-100'>
       <Grid.Container className='h-100'>
-        <Grid style={{ background: "#0070F3" }} xs={12} sm={6}></Grid>
+        <Grid style={{ background: "#0070F3" }} xs={0} sm={6}></Grid>
         <Grid xs={12} sm={6}>
           <Container style={{ textAlign: "center", display: "flex", flexDirection: "column", justifyContent: 'center', width: '100%' }}>
             <Text

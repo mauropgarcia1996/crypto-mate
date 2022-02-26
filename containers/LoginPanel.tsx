@@ -2,10 +2,19 @@ import LoginWithMetamaskButton from "../components/common/LoginWithMetamaskButto
 
 const LoginPanel = () => {
     return (
-        <div>
+        <div style={styles.container}>
             <LoginWithMetamaskButton />
         </div>
     )
+}
+
+const styles = {
+    container: {
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        marginBlock: "1rem"
+    }
 }
 
 export default LoginPanel
