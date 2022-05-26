@@ -1,5 +1,7 @@
 import { ethers } from "ethers";
 
+export const isMetamaskInstalled = () => window.ethereum;
+
 export const connectToBSC = async () => {
     const ethereum = window.ethereum;
     const accounts = await ethereum.request({ method: 'eth_requestAccounts' });

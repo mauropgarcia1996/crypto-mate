@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import LoginPanel from '../containers/LoginPanel';
 import MainPanel from '../containers/MainPanel';
 import { useWalletStore } from "../stores/walletStore";
-import { isConnected, sendTransaction } from '../utils/wallet';
+import { isConnected, isMetamaskInstalled, sendTransaction } from '../utils/wallet';
 
 /**
  * Provisory fix
@@ -19,12 +19,12 @@ const Home: NextPage = () => {
   const { wallet, setWallet } = useWalletStore()
 
   useEffect(() => {
-    addEventListener()
+    isMetamaskInstalled() && addEventListener()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    checkConnection();
+    isMetamaskInstalled() && checkConnection();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [wallet])
 
